@@ -1,4 +1,4 @@
-FROM php:7.1.14-fpm
+FROM php:5.6.40-fpm
 
 LABEL maintainer="Ivan Kolesnikov <ivankolesnikovdev@gmail.com>"
 
@@ -19,12 +19,14 @@ RUN apt-get update && apt-get upgrade -y \
     libmemcached-dev \
     libpq-dev \
     libsqlite3-dev \
+    libssh2-1-dev \
+    libssh2-1 \
     libssl-dev \
     libreadline-dev \
     libxslt1-dev \
     memcached \
-    unzip \
     wget \
+    unzip \
     zlib1g-dev \
     && docker-php-ext-configure gd \
     --with-freetype-dir=/usr/include/ \
@@ -43,6 +45,8 @@ RUN apt-get update && apt-get upgrade -y \
     calendar \
     exif \
     gettext \
+    mbstring \
+    mcrypt \
     mysqli \
     opcache \
     pdo_mysql \
@@ -53,11 +57,11 @@ RUN apt-get update && apt-get upgrade -y \
     xmlrpc \
     xsl \
     zip \
-    && pecl install xdebug && docker-php-ext-enable xdebug \
-    && pecl install memcached && docker-php-ext-enable memcached \
+    && pecl install xdebug-2.5.5 && docker-php-ext-enable xdebug \
+    && pecl install memcached-2.2.0 && docker-php-ext-enable memcached \
     && pecl install mongodb && docker-php-ext-enable mongodb \
     && pecl install redis && docker-php-ext-enable redis \
-    && pecl install mcrypt-1.0.0 && docker-php-ext-enable mcrypt \
+    && pecl install ssh2 && docker-php-ext-enable ssh2 \
     && yes '' | pecl install imagick && docker-php-ext-enable imagick \
     && docker-php-source delete \
     && apt-get remove -y g++ wget \
