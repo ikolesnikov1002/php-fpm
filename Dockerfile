@@ -1,4 +1,4 @@
-FROM php:7.2.15-fpm
+FROM php:7.1.14-fpm
 
 LABEL maintainer="Ivan Kolesnikov <ivankolesnikovdev@gmail.com>"
 
@@ -23,8 +23,8 @@ RUN apt-get update && apt-get upgrade -y \
     libreadline-dev \
     libxslt1-dev \
     memcached \
-    wget \
     unzip \
+    wget \
     zlib1g-dev \
     && docker-php-ext-configure gd \
     --with-freetype-dir=/usr/include/ \
@@ -57,8 +57,8 @@ RUN apt-get update && apt-get upgrade -y \
     && pecl install memcached && docker-php-ext-enable memcached \
     && pecl install mongodb && docker-php-ext-enable mongodb \
     && pecl install redis && docker-php-ext-enable redis \
+    && pecl install mcrypt-1.0.0 && docker-php-ext-enable mcrypt \
     && yes '' | pecl install imagick && docker-php-ext-enable imagick \
-    && pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt \
     && docker-php-source delete \
     && apt-get remove -y g++ wget \
     && apt-get autoremove --purge -y && apt-get autoclean -y && apt-get clean -y \
