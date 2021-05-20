@@ -1,4 +1,4 @@
-FROM php:5.6.40-fpm
+FROM php:5.6.32-fpm
 
 LABEL maintainer="Ivan Kolesnikov <ivankolesnikovdev@gmail.com>"
 
@@ -45,6 +45,7 @@ RUN apt-get update && apt-get upgrade -y \
     calendar \
     exif \
     gettext \
+    json \
     mbstring \
     mcrypt \
     mysqli \
